@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  device_type: 1
+  device_id: MyString
+  cookie: MyString
+
+two:
+  device_type: 1
+  device_id: MyString
+  cookie: MyString

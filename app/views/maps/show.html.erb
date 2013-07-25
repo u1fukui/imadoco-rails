@@ -1,0 +1,40 @@
+<!-- ナビゲーション -->
+<div class="navbar navbar-inverse navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="nav-collapse collapse span11 offset1">
+          <ul class="nav" href="#">
+            <li><a class="brand" href="#">imadoco?</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid centering">
+  <div class="row-fluid">
+    <div id="map-canvas"></div>
+    <div>1. まずは位置情報を取得！</div>
+    <input type="button" value="居場所を取得" onclick="getPosition()" />
+    <br><br>
+    <div>2. 居場所がずれてたら地図をタップして修正してね
+    <br><br>
+    <div>3. 次にメッセージを添えて相手に教えよう♪</div>
+    <%= form_tag("/maps/position") do %>
+      <input type="hidden" name="lat" id="lat">
+      <input type="hidden" name="lng" id="lng">
+      <input type="hidden" name="key" value="<%= @key %>">
+      <input type="text" name="message" placeholder="メッセージをここに入力"  value="" style="width: 90%;">
+      <input type="submit" value="居場所を教える">
+    <% end %>
+  </div>
+</div>
+
+<!-- Bootstrap -->
+<script src="//code.jquery.com/jquery.js"></script>
+  
+<!-- Map -->
+<script type="text/javascript"
+         src="//maps.google.com/maps/api/js?sensor=false"></script>

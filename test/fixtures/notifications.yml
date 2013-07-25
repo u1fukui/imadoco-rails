@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  map_id: 1
+  lat: 1.5
+  lng: 1.5
+  message: MyString
+
+two:
+  map_id: 1
+  lat: 1.5
+  lng: 1.5
+  message: MyString
