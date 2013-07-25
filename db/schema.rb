@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20130724085216) do
   create_table "users", force: true do |t|
     t.integer  "device_type"
     t.string   "device_id"
-    t.string   "cookie"
+    t.string   "session"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -10,7 +10,7 @@ class V1::TasksController < ApplicationController
 
     dec = OpenSSL::Cipher::Cipher.new('AES-256-CBC') 
     dec.decrypt
-    dec.key = "ca32lmlcmalk3mlamalc038932lcklka"
+    dec.key = Imadoco::Application.config.decrypt_key
     dec.iv = "\000"*32
     a = dec.update(s)
     b = dec.final
@@ -24,8 +24,8 @@ class V1::TasksController < ApplicationController
   end
 
   # 無効なユーザかを判定
-  def is_invalid_user(user_id, cookie)
-    user = User.find_by_id_and_cookie(user_id, cookie)
+  def is_invalid_user(user_id, api_session)
+    user = User.find_by_id_and_session(user_id, api_session)
     return user.nil?
   end
 
@@ -39,12 +39,12 @@ class V1::TasksController < ApplicationController
       user = User.new
       user.device_id = device_id
       user.device_type = params[:device_type]
-      user.cookie = create_random_string(28)
+      user.session = create_random_string(28)
       user.save
     end
 
     # userIdを返す
-    render :json => {user_id: user.id, cookie: user.cookie}.to_json, :status => 202
+    render :json => {user_id: user.id, api_session: user.session}.to_json, :status => 202
   end
 
   # 地図URLの生成
@@ -53,22 +53,14 @@ class V1::TasksController < ApplicationController
     name = params[:name]
     
     # ユーザ確認
-    #cookie = request.cookies[:user_cookie]
+    api_session = params[:api_session]
     
-#    p request.env['HTTP_COOKIE']
-#    p request.cookies['user_cookie']
-#    p request.cookies[:user_cookie]
-#    p cookies['user_cookie']
-#    p cookies[:user_cookie]
-#    p session['user_cookie']
-#    p session[:user_cookie]
+    p api_session 
    
-#    cookie = session[:user_cookie]
-
-#    if is_invalid_user(user_id, cookie) then
-#      render :status => 401
-#      return
-#    end
+    if is_invalid_user(user_id, api_session) then
+      render :status => 401
+      return
+    end
 
     public_id = create_random_string(12)
     
@@ -80,7 +72,7 @@ class V1::TasksController < ApplicationController
     begin
       map.save!
       
-      url = "http://#{env['HTTP_HOST']}/maps/#{public_id}"
+      url = "http://#{Imadoco::Application.config.content_host_name}/maps/#{public_id}"
       
       render :json => {mail_body: url, mail_subject: "imadoco"}.to_json, :status => 202
 
@@ -101,12 +93,12 @@ class V1::TasksController < ApplicationController
     user_id = params[:user_id]
 
     # ユーザ確認
-#    cookie = request.cookies['user_cookie']
-#    p "cookie = #{cookie}"
-#    if is_invalid_user(user_id, cookie) then
-#      render :status => 401
-#      return
-#    end
+    api_session = params[:api_session]
+    p "session = #{api_session}"
+    if is_invalid_user(user_id, api_session) then
+      render :status => 401
+      return
+    end
 
     notifications = Map.joins(:notifications).select("notifications.id, maps.name, notifications.lat, notifications.lng, notifications.message, notifications.created_at").where(:user_id => user_id).order("notifications.id DESC")
     #positions = Position.joins(:map).select("positions.id, maps.public_id, positions.lat, positions.lng, positions.message, positions.created_at").where(:user_id => user_id)

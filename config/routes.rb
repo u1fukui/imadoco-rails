@@ -54,13 +54,13 @@ Imadoco::Application.routes.draw do
   #     resources :products
   #   end
 
-  #constraints subdomain: 'api' do
+  constraints subdomain: 'api' do
     namespace :v1 do
       post 'device.json' => 'tasks#register_device'
       post 'mail.json' => 'tasks#create_map'
       get 'notifications/:user_id' => 'tasks#show_notifications'
     end
-  #end
+  end
   
   get 'maps/:key' => 'maps#show'
   post 'maps/position' => 'maps#register_notification'

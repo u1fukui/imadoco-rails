@@ -15,7 +15,7 @@ class MapsController < ApplicationController
     notification.content_available = true
     notification.custom_data = {notification_id: notification_id}
 
-    apn = Imadoco2::Application.config.apn
+    apn = Imadoco::Application.config.apn
     
     # And... sent! That's all it takes.
     Imadoco::Application.config.apn.push(notification)

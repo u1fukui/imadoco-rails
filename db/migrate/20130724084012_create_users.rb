@@ -3,8 +3,8 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.integer :device_type
       t.string :device_id
-      t.string :cookie
-
+      t.string :session
+      
       t.timestamps
     end
   end

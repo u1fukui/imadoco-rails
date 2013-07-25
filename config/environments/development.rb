@@ -27,13 +27,13 @@ Imadoco::Application.configure do
   # number of complex assets.
   config.assets.debug = false
 
-  # decrypt
-  config.decrypt_key = ""
-  
+  # decrypt key
+  config.decrypt_key = 
+
   # remote notification
   apn = Houston::Client.development
   apn.certificate = File.read("config/imadoco_apns_dev.pem")
-  apn.passphrase = ""
+  apn.passphrase = 
   config.apn = apn   
 
 end
