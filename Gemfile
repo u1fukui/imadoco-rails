@@ -53,3 +53,6 @@ gem 'mysql2'
 # PUSH通知
 gem 'houston'
 
+# jpmobile
+gem 'jpmobile'
+gem 'jpmobile-terminfo'

@@ -77,4 +77,14 @@ Imadoco::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # 暗号化
+  config.decrypt_key = 
+
+  # PUSH通知
+  apn = Houston::Client.production
+  apn.certificate = File.read("config/imadoco_apns_production.pem")
+  apn.passphrase = 
+  config.apn = apn
+
 end

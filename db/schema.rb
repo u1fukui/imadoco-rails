@@ -14,28 +14,35 @@
 ActiveRecord::Schema.define(version: 20130724085216) do
 
   create_table "maps", force: true do |t|
-    t.integer  "user_id"
-    t.string   "public_id"
+    t.integer  "user_id",    null: false
+    t.string   "public_id",  null: false
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "maps", ["user_id"], name: "index_maps_on_user_id", using: :btree
+
   create_table "notifications", force: true do |t|
-    t.integer  "map_id"
+    t.integer  "map_id",                     null: false
     t.float    "lat"
     t.float    "lng"
     t.string   "message"
+    t.boolean  "pushed",     default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "notifications", ["map_id"], name: "index_notifications_on_map_id", using: :btree
+
   create_table "users", force: true do |t|
-    t.integer  "device_type"
+    t.integer  "device_type", null: false
     t.string   "device_id"
     t.string   "session"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["id", "session"], name: "index_users_on_id_and_session", unique: true, using: :btree
 
 end
