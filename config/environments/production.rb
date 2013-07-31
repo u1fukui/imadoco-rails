@@ -87,4 +87,7 @@ Imadoco::Application.configure do
   apn.passphrase = 
   config.apn = apn
 
+  # mail link
+  config.content_host_name = 
+
 end
