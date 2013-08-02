@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>imadoco? - 知人の現在地をかんたん確認</title>
+  <title>imadoco? - 友達や家族の現在地をかんたん確認</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <!-- ナビゲーション -->
+  <div class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="nav-collapse collapse span11 offset1">
+            <ul class="nav" href="#">
+              <li><a class="brand" href="#">imadoco?</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+<!-- コンテンツ -->
 <%= yield %>
 
 </body>
