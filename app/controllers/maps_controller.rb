@@ -105,7 +105,7 @@ class MapsController < ApplicationController
       map_height = 240
     end
 
-    src = "http://maps.googleapis.com/maps/api/staticmap?center=#{@lat},#{@lng}&zoom=15&size=#{map_width}x#{map_height}&sensor=false&mobile=true&markers=#{@lat},#{@lng}"
+    src = "http://maps.googleapis.com/maps/api/staticmap?center=#{@lat},#{@lng}&zoom=15&size=#{map_width}x#{map_height}&sensor=false&format=jpg-baseline&markers=#{@lat},#{@lng}"
     @map_image_tag = "<img src=\"#{src}\" alt=\"map\" width=\"#{map_width}\" height=\"#{map_height}\">"
   end
 
