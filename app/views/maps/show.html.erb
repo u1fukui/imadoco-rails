@@ -1,19 +1,23 @@
 <div class="container-fluid centering">
   <div class="row-fluid">
     <div id="map-canvas"></div>
-    <div>1. まずは位置情報を取得！</div>
-    <input type="button" value="居場所を取得" onclick="getPosition()" />
-    <br><br>
-    <div>2. 居場所がずれてたら地図をタップして修正してね
-    <br><br>
-    <div>3. 次にメッセージを添えて相手に教えよう♪</div>
-    <%= form_tag("/notification") do %>
-      <input type="hidden" name="lat" id="lat">
-      <input type="hidden" name="lng" id="lng">
-      <input type="hidden" name="key" value="<%= @key %>">
-      <input type="text" name="message" placeholder="メッセージをここに入力"  value="" style="width: 90%;">
-      <input type="submit" value="居場所を教える">
-    <% end %>
+    <div class="step">
+      <div>1. まずは位置情報を取得！</div>
+      <input type="button" value="居場所を取得" onclick="getPosition()" />
+    </div>
+    <div class="step">
+      <div>2. 居場所がずれてたら地図をタップして修正してね
+    </div>
+    <div class="step">
+      <div>3. 次にメッセージを添えて相手に教えよう♪</div>
+      <%= form_tag("/notification") do %>
+        <input type="hidden" name="lat" id="lat">
+        <input type="hidden" name="lng" id="lng">
+        <input type="hidden" name="key" value="<%= @key %>">
+        <input type="text" name="message" placeholder="メッセージをここに入力"  value="" style="width: 90%;">
+        <input type="submit" value="居場所を教える">
+      <% end %>
+    </div>
   </div>
 </div>
 
