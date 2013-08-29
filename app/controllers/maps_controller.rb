@@ -1,7 +1,6 @@
-# coding:utf-8
 require 'houston'
-require 'pp'
 
+# ブラウザから位置情報をサーバに登録する
 class MapsController < ApplicationController
 
   # これがないとdocomoでエラーになる
@@ -9,8 +8,17 @@ class MapsController < ApplicationController
 
   # ガラケー対応
   include Jpmobile::ViewSelector
-  
+
+
   # 位置情報登録ページの表示
+  #
+  # === パラメータ:
+  # key::
+  #   地図識別ID
+  #
+  # === 返り値:
+  # Webページ
+  #
   def show
     @key = params[:key]
 
@@ -23,7 +31,22 @@ class MapsController < ApplicationController
     session[:map_key] = @key
   end
 
+
   # 位置情報の登録
+  #
+  # === パラメータ:
+  # lat::
+  #   登録する位置情報の緯度
+  # lng::
+  #   登録する位置情報の経度
+  # key::
+  #   地図識別ID
+  # message (option)::
+  #   登録するメッセージ
+  #
+  # === 返り値:
+  # 成功したらThanksページ、失敗したらエラーページを返す
+  #
   def register_notification
     lat = params[:lat]
     lng = params[:lng]
@@ -56,7 +79,18 @@ class MapsController < ApplicationController
     push_notification(user.original_device_id(), notification.id)
   end
 
-  # メッセージ入力画面を表示
+
+  # 位置確認＆メッセージ入力ページを表示(ガラケー用)
+  #
+  # === パラメータ:
+  # 位置情報::
+  #   jpmobileを使用して抽象化されている
+  # map_key (Cookie)::
+  #   地図識別ID
+  #
+  # === 返り値:
+  # Webページ
+  #
   def register_position_mobile
     
     # Cookie非対応

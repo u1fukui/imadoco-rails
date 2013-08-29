@@ -1,18 +1,38 @@
 class User < ActiveRecord::Base
+　
   has_many :maps
 
-  # $BL58z$J%f!<%6$+$rH=Dj(B
+  # 無効なユーザかを判定
+  #
+  # === パラメータ:
+  # user_id::
+  #   ユーザ識別ID
+  # api_session::
+  #   セッションID
+  #
+  # === 返り値:
+  # 無効なユーザの場合はtrue
+  #
   def self.is_invalid(user_id, api_session)
     user = User.find_by_id_and_session(user_id, api_session)
     return user.nil?
   end
 
-  # $B?75,%f!<%6$N:n@.(B
+
+  # ユーザを作成してDBに登録
+  #
+  # === パラメータ:
+  # device_type::
+  #   端末の種類ID(0:iPhone, 1:Android)
+  #
+  # === 返り値:
+  # ユーザの作成に成功したらuser。失敗したらnil。
+  #
   def self.create(device_type)
     user = User.new
     user.device_type = device_type
     user.session = User.create_session()
-    
+
     if user.save() then
       return user
     else
@@ -20,24 +40,47 @@ class User < ActiveRecord::Base
     end
   end
 
-  # $B99?7(B
+
+  # セッションIDの更新
+  #
+  # === パラメータ:
+  # なし
+  #
+  # === 返り値:
+  # 成功したらtrue
+  #
   def update
     return self.update_attributes(:session => User.create_session())
   end
 
-  # $B%G%P%$%9(BID$B$N99?7(B
+
+  # デバイスIDの更新
+  #
+  # === パラメータ:
+  # device_id
+  #
+  # === 返り値:
+  # 成功したらtrue
+  #
   def update_device_id(device_id)
     return self.update_attributes(:device_id => device_id)
   end
 
-  # $BJ#9g$7$?%G%P%$%9(BID$B$r<hF@(B
+  # 復号したデバイスIDを取得
+  #
+  # === パラメータ:
+  # なし
+  #
+  # === 返り値:
+  # 成功したらtrue
+  #
   def original_device_id
     return User.decrypt(self.device_id)
   end
 
   private
 
-  # $BI|9f=hM}(B
+  # 復号処理
   def self.decrypt(base64_text)
 
     s = base64_text.unpack('m')[0]
@@ -57,3 +100,4 @@ class User < ActiveRecord::Base
   end
 
 end
+

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+
+<title>class V1::TasksController - Rails Application Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>app/controllers/v1/tasks_controller.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="../ApplicationController.html">ApplicationController</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-create_map">#create_map</a>
+    
+    <li><a href="#method-i-register_device">#register_device</a>
+    
+    <li><a href="#method-i-register_user">#register_user</a>
+    
+    <li><a href="#method-i-show_notifications">#show_notifications</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../README_rdoc.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../V1.html">V1</a>
+  
+    <li><a href="../V1/TasksController.html">V1::TasksController</a>
+  
+    <li><a href="../ApplicationController.html">ApplicationController</a>
+  
+    <li><a href="../ApplicationHelper.html">ApplicationHelper</a>
+  
+    <li><a href="../Map.html">Map</a>
+  
+    <li><a href="../MapsController.html">MapsController</a>
+  
+    <li><a href="../MapsHelper.html">MapsHelper</a>
+  
+    <li><a href="../Notification.html">Notification</a>
+  
+    <li><a href="../User.html">User</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class V1::TasksController</h1>
+
+  <div id="description" class="description">
+    
+<p>アプリとのやりとりをするAPIクラス</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-create_map" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_map</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>地図URLの生成API</p>
+
+<h3 id="method-i-create_map-label-%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%3A">パラメータ:</h3>
+<dl class="rdoc-list note-list"><dt>user_id
+<dd>
+<p>API実行者のユーザID</p>
+</dd><dt>map_name
+<dd>
+<p>識別する為の地図の名前(重複OK)</p>
+</dd><dt>api_session
+<dd>
+<p>セッションID</p>
+</dd></dl>
+
+<h3 id="method-i-create_map-label-%E8%BF%94%E3%82%8A%E5%80%A4%3A">返り値:</h3>
+<dl class="rdoc-list note-list"><dt>mail_subject
+<dd>
+<p>メールタイトル</p>
+</dd><dt>mail_body
+<dd>
+<p>メール本文</p>
+</dd></dl>
+          
+
+          
+          <div class="method-source-code" id="create_map-source">
+            <pre><span class="ruby-comment"># File app/controllers/v1/tasks_controller.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_map</span>
+  <span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:user_id</span>]
+  <span class="ruby-identifier">map_name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:map_name</span>]
+
+  <span class="ruby-comment"># ユーザ確認</span>
+  <span class="ruby-identifier">api_session</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:api_session</span>]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">is_invalid</span>(<span class="ruby-identifier">user_id</span>, <span class="ruby-identifier">api_session</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">head</span> <span class="ruby-value">401</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">map</span> = <span class="ruby-constant">Map</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">user_id</span>, <span class="ruby-identifier">map_name</span>)
+
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">map</span>.<span class="ruby-identifier">save!</span>
+
+    <span class="ruby-identifier">url</span> = <span class="ruby-identifier">map</span>.<span class="ruby-identifier">url</span>()
+
+    <span class="ruby-identifier">subject</span> = <span class="ruby-string">&quot;今どこ？&quot;</span>
+    <span class="ruby-identifier">body</span> = <span class="ruby-node">&quot;ここから現在地を教えてー！\n#{url}\n\n---\n友人・家族の現在地をかんたん確認♪\nhttp://imado.co/&quot;</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">mail_body</span><span class="ruby-operator">:</span> <span class="ruby-identifier">body</span>, <span class="ruby-identifier">mail_subject</span><span class="ruby-operator">:</span> <span class="ruby-identifier">subject</span>}.<span class="ruby-identifier">to_json</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">202</span>
+
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordNotUnique</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+    <span class="ruby-identifier">head</span> <span class="ruby-value">400</span>
+  <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- create_map-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- create_map-method -->
+
+    
+      <div id="method-i-register_device" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">register_device</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Push通知の為のデバイスID登録API</p>
+
+<h3 id="method-i-register_device-label-%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%3A">パラメータ:</h3>
+<dl class="rdoc-list note-list"><dt>user_id
+<dd>
+<p>API実行者のユーザID</p>
+</dd><dt>api_session
+<dd>
+<p>セッションID</p>
+</dd></dl>
+
+<h3 id="method-i-register_device-label-%E8%BF%94%E3%82%8A%E5%80%A4%3A">返り値:</h3>
+
+<p>成功時は、202</p>
+          
+
+          
+          <div class="method-source-code" id="register_device-source">
+            <pre><span class="ruby-comment"># File app/controllers/v1/tasks_controller.rb, line 53</span>
+ <span class="ruby-keyword">def</span> <span class="ruby-identifier">register_device</span>
+   <span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:user_id</span>]
+   <span class="ruby-identifier">api_session</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:api_session</span>]
+
+<span class="ruby-comment">#   if User.is_invalid(user_id, api_session) then</span>
+<span class="ruby-comment">#     head 401</span>
+<span class="ruby-comment">#     return</span>
+<span class="ruby-comment">#   end</span>
+
+   <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">user_id</span>)
+   <span class="ruby-identifier">user</span>.<span class="ruby-identifier">update_device_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:device_id</span>])
+
+   <span class="ruby-identifier">head</span> <span class="ruby-value">202</span>
+ <span class="ruby-keyword">end</span></pre>
+          </div><!-- register_device-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- register_device-method -->
+
+    
+      <div id="method-i-register_user" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">register_user</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>ユーザ登録API</p>
+
+<h3 id="method-i-register_user-label-%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%3A">パラメータ:</h3>
+<dl class="rdoc-list note-list"><dt>user_id (option)
+<dd>
+<p>APIを実行するユーザのID。 ユーザIDがまた振り分けられていない場合は、パラメータを付けなくて良い。</p>
+</dd></dl>
+
+<h3 id="method-i-register_user-label-%E8%BF%94%E3%82%8A%E5%80%A4%3A">返り値:</h3>
+<dl class="rdoc-list note-list"><dt>user_id
+<dd>
+<p>APIを実行する時に必要なユーザID。</p>
+</dd><dt>api_session
+<dd>
+<p>APIを実行する時に必要なセッションID。</p>
+</dd></dl>
+          
+
+          
+          <div class="method-source-code" id="register_user-source">
+            <pre><span class="ruby-comment"># File app/controllers/v1/tasks_controller.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">register_user</span>
+
+  <span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:user_id</span>].<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">user_id</span>)
+
+  <span class="ruby-comment"># ユーザIDがない場合は新規作成。ある場合は、sessionIdの更新だけ</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:device_type</span>])
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">head</span> <span class="ruby-value">400</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">user</span>.<span class="ruby-identifier">update</span>() <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">head</span> <span class="ruby-value">400</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> {<span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">api_session</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">session</span>}.<span class="ruby-identifier">to_json</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">202</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- register_user-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- register_user-method -->
+
+    
+      <div id="method-i-show_notifications" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show_notifications</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>位置情報履歴の取得API</p>
+
+<h3 id="method-i-show_notifications-label-%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%3A">パラメータ:</h3>
+<dl class="rdoc-list note-list"><dt>user_id
+<dd>
+<p>API実行者のユーザID</p>
+</dd><dt>api_session
+<dd>
+<p>セッションID</p>
+</dd></dl>
+
+<h3 id="method-i-show_notifications-label-%E8%BF%94%E3%82%8A%E5%80%A4%3A">返り値:</h3>
+
+<p>位置情報オブジェクトの配列</p>
+          
+
+          
+          <div class="method-source-code" id="show_notifications-source">
+            <pre><span class="ruby-comment"># File app/controllers/v1/tasks_controller.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show_notifications</span>
+  <span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:user_id</span>]
+
+  <span class="ruby-comment"># ユーザ確認</span>
+  <span class="ruby-identifier">api_session</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:api_session</span>]
+  <span class="ruby-identifier">p</span> <span class="ruby-node">&quot;session = #{api_session}&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">is_invalid</span>(<span class="ruby-identifier">user_id</span>, <span class="ruby-identifier">api_session</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">head</span> <span class="ruby-value">401</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># 通知履歴を取得</span>
+  <span class="ruby-identifier">notifications</span> = <span class="ruby-constant">Notification</span>.<span class="ruby-identifier">leatest_notifications</span>(<span class="ruby-identifier">user_id</span>)
+
+  <span class="ruby-identifier">render</span> <span class="ruby-value">:json</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">notifications</span>.<span class="ruby-identifier">to_json</span>(<span class="ruby-value">:root</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>), <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">200</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- show_notifications-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- show_notifications-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.2.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

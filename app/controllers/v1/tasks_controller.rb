@@ -1,9 +1,23 @@
 require 'openssl'
 
+# アプリとのやりとりをするAPIクラス
+
 class V1::TasksController < ApplicationController
   skip_before_filter :verify_authenticity_token # allow CSRF
   
-  # ユーザ登録
+  # ユーザ登録API
+  # 
+  # === パラメータ:
+  # user_id (option)::
+  #   APIを実行するユーザのID。
+  #   ユーザIDがまた振り分けられていない場合は、パラメータを付けなくて良い。
+  #
+  # === 返り値:
+  # user_id::
+  #   APIを実行する時に必要なユーザID。
+  # api_session::
+  #   APIを実行する時に必要なセッションID。
+  # 
   def register_user
 
     user_id = params[:user_id].to_i
@@ -21,13 +35,21 @@ class V1::TasksController < ApplicationController
       end
     end
 
-    logger.info("id = #{user.id}")
-    logger.info("session = #{user.session}")
-
     render :json => {user_id: user.id, api_session: user.session}.to_json, :status => 202
   end
 
-  # 端末の登録
+
+  # Push通知の為のデバイスID登録API
+  # 
+  # === パラメータ:
+  # user_id::
+  #   API実行者のユーザID
+  # api_session::
+  #   セッションID
+  #
+  # === 返り値:
+  # 成功時は、202
+  #
   def register_device
     user_id = params[:user_id]
     api_session = params[:api_session]
@@ -43,7 +65,25 @@ class V1::TasksController < ApplicationController
     head 202
   end
 
-  # 地図URLの生成
+
+
+  #
+  # 地図URLの生成API
+  #
+  # === パラメータ:
+  # user_id::
+  #   API実行者のユーザID
+  # map_name::
+  #   識別する為の地図の名前(重複OK)
+  # api_session::
+  #   セッションID
+  #
+  # === 返り値:
+  # mail_subject::
+  #   メールタイトル
+  # mail_body::
+  #   メール本文
+  #
   def create_map
     user_id = params[:user_id]
     map_name = params[:map_name]
@@ -73,7 +113,17 @@ class V1::TasksController < ApplicationController
 
   end
 
-  # 居場所情報の取得
+  # 位置情報履歴の取得API
+  #
+  # === パラメータ:
+  # user_id::
+  #   API実行者のユーザID
+  # api_session::
+  #   セッションID
+  #
+  # === 返り値:
+  # 位置情報オブジェクトの配列
+  #
   def show_notifications
     user_id = params[:user_id]
 
@@ -85,11 +135,8 @@ class V1::TasksController < ApplicationController
       return
     end
 
-
+    # 通知履歴を取得
     notifications = Notification.leatest_notifications(user_id)
-    #notifications = Map.joins(:notifications).select("notifications.id, maps.name, notifications.lat, notifications.lng, notifications.message, notifications.created_at").where(:user_id => user_id).order("notifications.id DESC")
-    #positions = Position.joins(:map).select("positions.id, maps.public_id, positions.lat, positions.lng, positions.message, positions.created_at").where(:user_id => user_id)
-
 
     render :json => notifications.to_json(:root => false), :status => 200
 

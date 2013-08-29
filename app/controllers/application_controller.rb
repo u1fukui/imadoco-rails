@@ -6,6 +6,15 @@ class ApplicationController < ActionController::Base
   # 例外ハンドル
   rescue_from Exception, :with => :render_500
 
+
+  # 404エラーページの表示
+  #
+  # === パラメータ:
+  # execption
+  #
+  # === 返り値:
+  # 404ページ
+  #
   def render_404(exception = nil)
     if exception
       logger.info "Rendering 404 with exception: #{exception.message}"
@@ -14,6 +23,15 @@ class ApplicationController < ActionController::Base
     render :template => "errors/error_404", :status => 404, :content_type => 'text/html'
   end
 
+
+  # 500エラーページの表示
+  #
+  # === パラメータ:
+  # exception
+  #
+  # === 返り値:
+  # 500ページ
+  #
   def render_500(exception = nil)
     if exception
       logger.info "Rendering 500 with exception: #{exception.message}"
@@ -22,7 +40,17 @@ class ApplicationController < ActionController::Base
     render :template => "errors/error_500", :status => 500, :content_type => 'text/html'
   end
 
-  # 指定された端末にpush通信を送る
+  # 指定した端末にpush通信を送る
+  #
+  # === パラメータ:
+  # device_id::
+  #   Push通知を送るデバイスのトークン
+  # notification_id::
+  #   通知識別ID
+  #
+  # === 返り値:
+  # なし
+  #
   def push_notification(device_id, notification_id)
     logger.info "push notification!!!"
 
