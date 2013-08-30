@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-　
+
   has_many :maps
 
   # 無効なユーザかを判定
