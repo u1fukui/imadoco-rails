@@ -1,7 +1,7 @@
 imadoco-rails
 ======================
 友達や家族の現在地をかんたんに確認する事ができるiOSアプリ「imadoco?」のサーバ側コードです。
-アプリ側のコードも[こちら](https://github.com/u1fukui/rensou-ios)で公開しています。
+アプリ側のコードも[こちら](https://github.com/u1fukui/imadoco-ios)で公開しています。
 
 サイト：[http://imado.co/](http://imado.co/])
 
